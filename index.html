@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cha's Quick Lookup</title>
+<title>Mist Services</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Caveat:wght@600;700&family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -83,8 +83,8 @@
     left: 60%;
     border-radius: 50%;
     background: var(--accent-dim);
-    filter: blur(70px);
-    opacity: 0.6;
+    filter: blur(42px);
+    opacity: 0.38;
     will-change: transform;
     animation: drift 26s ease-in-out infinite;
   }
@@ -107,8 +107,8 @@
       linear-gradient(90deg, var(--border) 1px, transparent 1px);
     background-size: 64px 64px;
     opacity: 0.35;
-    mask-image: radial-gradient(ellipse 60% 50% at 50% 25%, black 15%, transparent 68%);
-    -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 25%, black 15%, transparent 68%);
+    mask-image: linear-gradient(to bottom, black, transparent 72%);
+    -webkit-mask-image: linear-gradient(to bottom, black, transparent 72%);
   }
 
   /* ─── NAVBAR ─── */
@@ -117,8 +117,8 @@
     top: 0;
     z-index: 100;
     background: color-mix(in srgb, var(--bg) 82%, transparent);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border);
     padding: 0 24px;
     display: flex;
@@ -450,6 +450,18 @@
 
   .copy-btn .btn-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .copy-btn:hover { background: var(--btn-hover); border-color: var(--accent); color: var(--text); }
+  .recents-panel { max-width: 900px; margin: 0 auto 28px; text-align: left; }
+  .recents-panel[hidden] { display: none; }
+  #recents-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+  .recent-item { max-width: 100%; }
+  @media (prefers-reduced-motion: reduce) { .bg-blob, .pulse-dot { animation: none !important; } }
+  /* Keep scrolling responsive on lower-powered devices. */
+  .bg-wash, .bg-blob, .bg-grid { contain: strict; }
+  @media (max-width: 800px) {
+    .bg-blob { display: none; }
+    .bg-grid { opacity: .12; }
+    nav { backdrop-filter: none; -webkit-backdrop-filter: none; background: var(--bg); }
+  }
   .copy-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
   .copy-btn.copied { border-color: var(--success); color: var(--success); background: rgba(34,197,94,0.08); }
   .copy-btn svg { flex-shrink: 0; opacity: 0.6; }
@@ -570,6 +582,40 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
   }
+  /* Refresh: calm dashboard layout */
+  :root { --bg:#0b1020; --surface:#111a2e; --surface2:#18243d; --accent:#60a5fa; --accent-bright:#bfdbfe; --accent-dim:rgba(96,165,250,.14); --text:#f3f7ff; --text-muted:#9aabc7; --text-dim:#607291; --btn-bg:#14213a; --btn-hover:#1d3153; --btn-border:rgba(96,165,250,.3); --border:rgba(180,205,255,.12); --border-hover:rgba(180,205,255,.28); --radius:14px; --radius-lg:22px; }
+  body { background:linear-gradient(135deg,#0b1020 0%,#101a32 48%,#172b43 100%); }
+  .bg-wash { background:radial-gradient(circle at 12% 8%,rgba(96,165,250,.2),transparent 30%),radial-gradient(circle at 88% 82%,rgba(45,212,191,.12),transparent 28%); }
+  .bg-blob { width:520px;height:520px;top:8%;left:52%;background:rgba(45,212,191,.08);filter:blur(110px);animation:drift 34s ease-in-out infinite; }
+  .bg-grid { background-size:42px 42px;opacity:.18;mask-image:linear-gradient(to bottom,black,transparent 78%); }
+  nav { height:68px; padding:0 clamp(18px,5vw,64px); background:rgba(11,16,32,.72); border-bottom-color:rgba(191,219,254,.14); }
+  .nav-logo { font-size:17px; letter-spacing:.3px; }
+  main { max-width:1000px; padding:76px 24px 100px; }
+  .hero-section { text-align:left; max-width:700px; margin:0 0 34px; }
+  .hero-badge { margin-bottom:18px; }
+  .hero-title { font-family:'Syne',sans-serif; font-size:clamp(36px,6vw,62px); line-height:1.08; letter-spacing:-2px; margin-bottom:14px; }
+  .hero-sub { font-size:18px; max-width:560px; }
+  .hero-credit { margin:12px 0 0; max-width:560px; }
+  .search-wrap { margin-bottom:20px; }
+  .search-bar { height:68px; padding:10px 10px 10px 22px; border-radius:18px; background:rgba(17,26,46,.9); }
+  .go-btn { height:48px; border-radius:13px; padding:0 24px; }
+  .copy-section-label { margin-top:28px; }
+  #copy-buttons { gap:10px; margin-bottom:28px; }
+  .copy-btn { background:rgba(20,33,58,.82); padding:10px 16px; }
+  .frame-wrap { border-radius:20px; background:rgba(17,26,46,.9); }
+  .frame-bar { padding:12px 16px; }
+  #site-frame { height:650px; }
+  @media(max-width:640px){ main{padding:44px 16px 64px}.hero-section{text-align:left}.hero-title{font-size:40px;letter-spacing:-1px}.hero-sub{font-size:16px}.search-bar{height:auto;min-height:60px;padding-left:16px}.go-btn{padding:0 18px}.copy-btn{max-width:100%}#site-frame{height:480px} }
+  /* Mist Services header and centered URL control */
+  nav { height: 48px; padding: 0 24px; }
+  .nav-logo { font-size: 14px; gap: 7px; }
+  .nav-logo .pulse-dot { display:none; }
+  .mask-logo { width:28px; height:20px; display:inline-block; vertical-align:middle; }
+  .search-bar { justify-content:center; }
+  .search-center { text-align:center; }
+  #url-input { text-align:center; }
+  #url-input::placeholder { text-align:center; }
+  @media (max-width:640px) { nav { padding:0 14px; } .search-bar { padding-left:10px; } }
 </style>
 </head>
 <body>
@@ -581,7 +627,7 @@
 <nav>
   <div class="nav-logo">
     <div class="pulse-dot"></div>
-    Cha's Quick Lookup
+    Mist Services
   </div>
   <div class="nav-right">
     <span class="kbd-hint">Esc / Q = exit full</span>
@@ -617,16 +663,16 @@
       <div class="pulse-dot"></div>
       Instant web viewer
     </div>
-    <h1 class="hero-title">Cha's <span>Quick</span> Lookup</h1>
-    <p class="hero-sub">Paste any URL and view it right here — no tabs, no clutter.</p>
-    <p class="hero-credit">Hello and thank you for using my site! The way it works is you put in an exact URL, and it works perfectly. This site was made by Cha554 on GitHub.</p>
+    <h1 class="hero-title">Quick <span>LookUp</span></h1>
+    <p class="hero-sub">Paste a URL to open it here, without the extra tabs.</p>
+    <p class="hero-credit">Enter the complete web address. Some websites may prevent embedded viewing.</p>
   </div>
 
   <div class="search-wrap">
     <div class="search-bar" id="search-bar">
       <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <div class="search-center">
-        <input id="url-input" type="url" placeholder="Paste or type a URL..." autocomplete="off" spellcheck="false" aria-label="URL to load" />
+        <input id="url-input" type="url" placeholder="Paste URL link here..." autocomplete="off" spellcheck="false" aria-label="URL to load" />
         <div class="search-error" id="search-error">Please enter a valid URL</div>
       </div>
       <button class="go-btn" id="go-btn" aria-label="Load URL">
@@ -638,6 +684,11 @@
 
   <div class="copy-section-label">Quick copy</div>
   <div id="copy-buttons"></div>
+  <section class="recents-panel" id="recents-panel" hidden>
+    <div class="copy-section-label">Recent URLs</div>
+    <div id="recents-list"></div>
+    <button class="add-btn-ctrl" id="clear-recents" type="button">Clear recents</button>
+  </section>
 
   <div class="frame-wrap" id="frame-wrap">
     <div class="frame-empty" id="frame-empty">
@@ -897,6 +948,28 @@
     } catch { return false; }
   }
 
+  const RECENTS_KEY = 'recents';
+  const MAX_RECENTS = 12;
+  let recents = load(RECENTS_KEY, []);
+  function renderRecents() {
+    const list = $('recents-list');
+    list.innerHTML = recents.length ? '' : '<div class="frame-empty-sub">No recent URLs yet</div>';
+    recents.forEach(url => {
+      const button = document.createElement('button');
+      button.className = 'copy-btn recent-item';
+      button.type = 'button';
+      button.textContent = url;
+      button.title = 'Open ' + url;
+      button.addEventListener('click', () => { $('url-input').value = url; loadURL(); });
+      list.appendChild(button);
+    });
+  }
+  function saveRecent(url) {
+    recents = [url, ...recents.filter(item => item !== url)].slice(0, MAX_RECENTS);
+    save(RECENTS_KEY, recents);
+    renderRecents();
+  }
+
   let errorResetTimer;
   function flagError(msg) {
     const bar = $('search-bar');
@@ -919,6 +992,7 @@
     if (!isValidURL(raw)) return flagError("That doesn't look like a valid URL");
 
     if (!/^https?:\/\//i.test(raw)) raw = 'https://' + raw;
+    saveRecent(raw);
 
     const target = BASE_URL + '?url=' + encodeURIComponent(raw);
     const frame = $('site-frame');
@@ -940,6 +1014,16 @@
 
   $('site-frame').addEventListener('load', () => $('frame-loading-bar').classList.add('done'));
   $('go-btn').addEventListener('click', loadURL);
+  $('clear-recents').addEventListener('click', () => {
+    recents = [];
+    save(RECENTS_KEY, recents);
+    renderRecents();
+  });
+  $('settings-open').insertAdjacentHTML('beforebegin', '<button class="icon-btn settings-btn" id="recents-toggle" type="button">Recents</button>');
+  $('recents-toggle').addEventListener('click', () => {
+    $('recents-panel').hidden = !$('recents-panel').hidden;
+    if (!$('recents-panel').hidden) renderRecents();
+  });
 
   const urlInput = $('url-input');
   urlInput.addEventListener('keydown', e => { if (e.key === 'Enter') loadURL(); });
@@ -1006,6 +1090,7 @@
   // ── init ──
   applyTheme(currentTheme);
   renderCopyButtons();
+  renderRecents();
 })();
 </script>
 </body>
